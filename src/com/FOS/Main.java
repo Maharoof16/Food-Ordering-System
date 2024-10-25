@@ -12,7 +12,7 @@ public class Main {
             int choice = scan.nextInt();
             switch (choice) {
                 case 1:
-                    
+                    app.registerUser();
                     break;
                 case 2:
                     
