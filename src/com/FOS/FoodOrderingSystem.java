@@ -20,10 +20,17 @@ public class FoodOrderingSystem {
     }
 
     public void loginUser() {
-        System.out.print("Enter User Name: ");
+        System.out.print("Enter User Email / Phone Number: ");
         String userName = scan.nextLine();
         System.out.print("Enter Password: ");
         String password = scan.nextLine();
+        if(User.loginUser(userName, password)) {
+        	System.out.println("Login Successful");
+        }else {
+        	System.out.println("Invalid Credentials ! Login with valid user credentials or register");
+        };
+		
+        
        
     }
 

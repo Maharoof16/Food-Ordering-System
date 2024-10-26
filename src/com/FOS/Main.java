@@ -15,7 +15,7 @@ public class Main {
                     app.registerUser();
                     break;
                 case 2:
-                    
+                    app.loginUser();
                     break;
                 case 3:
                    

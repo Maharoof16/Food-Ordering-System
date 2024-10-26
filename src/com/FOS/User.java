@@ -21,27 +21,39 @@ public class User{
 	
 	public boolean isRegistered() {
         String path = "D:\\Full-Stack\\FoodOrderingSystem\\data\\users.txt";
-        File file=new File(path);
+        File file = new File(path);
         
-        try(BufferedReader br = new BufferedReader(new FileReader(file))){
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
-            
             while ((line = br.readLine()) != null) {
-            	String[] userDetails=line.split(",");
-            	System.out.println(userDetails);
-                
+                String[] userData = line.split(",");
+                if (userData.length >= 4) {
+                    String existingPhone = userData[2];
+                    String existingEmail = userData[3];
+
+                    if (existingPhone.equals(phoneNumber)) {
+                        System.out.println("Phone number already registered. Please login.");
+                        return true;
+                    }
+
+                    if (existingEmail.equals(email)) {
+                        System.out.println("Email already registered. Please login.");
+                        return true;
+                    }
+                }
             }
         } catch (Exception error) {
             System.out.println("Error checking registration: " + error.getMessage());
         }
+        
         return false; 
     }
-	
-	public void registerUser(){
-		if (isRegistered()) {
-            System.out.println("User already registered. Please login.");
+
+    public void registerUser() {
+        if (isRegistered()) {
             return;
         }
+        
 		String path="D:\\Full-Stack\\FoodOrderingSystem\\data\\users.txt";
 		File file=new File(path);
 		try(BufferedWriter bw=new BufferedWriter(new FileWriter(file,true));) {
@@ -54,6 +66,31 @@ public class User{
 	}
 	
 	
+    public static boolean loginUser(String userName,String password) {
+    	String path="D:\\Full-Stack\\FoodOrderingSystem\\data\\users.txt";
+		File file=new File(path);
+    	 try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+             String line;
+             while ((line = br.readLine()) != null) {
+                 String[] userData = line.split(",");
+                 if (userData.length >= 4) {
+                     String existingPhone = userData[2];
+                     String existingEmail = userData[3];
+                     String existingPassword=userData[1];
+
+                     if ((existingPhone.equals(userName) || existingEmail.equals(userName)) && existingPassword.equals(password) ) {
+                         return true;
+                         
+                     }
+
+                 }
+             }
+         } catch(Exception error) {
+        	 
+         }
+		return false;
+    	
+    }
 	
 	
 	
